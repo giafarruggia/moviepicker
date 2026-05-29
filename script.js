@@ -86,7 +86,7 @@ document.getElementById("pickMovie").addEventListener("click", () => {
     const result = document.getElementById("result");
 
     if (filtered.length === 0) {
-        result.textContent = "No matching movies found.";
+        result.textContent = "change your search and try again.";
         return;
     }
 
