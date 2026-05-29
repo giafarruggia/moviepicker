@@ -94,6 +94,7 @@ document.getElementById("pickMovie").addEventListener("click", () => {
         filtered[Math.floor(Math.random() * filtered.length)];
 
     result.textContent =
+        "tonight you should watch"
         movie.year
             ? `${movie.title} (${movie.year})`
             : movie.title;
