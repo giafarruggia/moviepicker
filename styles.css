@@ -1,7 +1,6 @@
 body {
     font-family: Arial, sans-serif;
 
-    /* Replace with your image URL */
     background-image: url("https://preview.redd.it/the-criterion-closet-v0-puwtmcsuxmuc1.jpeg?auto=webp&s=e29fbd011111ca3e7ab1b8eca6373a020b4c58a0");
 
     background-size: cover;
@@ -9,6 +8,10 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
     min-height: 100vh;
     margin: 0;
     padding: 40px;
