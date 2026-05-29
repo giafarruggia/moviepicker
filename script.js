@@ -26,13 +26,16 @@ fetch("movies.csv")
 });
 
 function populateMediums() {
-    const mediums = [...new Set(movies.map(m => m.medium))].filter(Boolean).sort();
+    let mediums = [...new Set(movies.map(m => m.medium))].filter(Boolean).sort();
+    mediums = mediums.filter(m => m !== "any medium").sort();
+    mediums.push("any medium")
     const select = document.getElementById("medium");
 
     mediums.forEach(medium => {
         const option = document.createElement("option");
         option.value = medium;
         option.textContent = medium;
+        document.getElementById("medium").appendChild(option);
         select.appendChild(option);
     });
 }
