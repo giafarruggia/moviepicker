@@ -10,11 +10,11 @@ fetch("movies.csv")
         const values = row.split(",");
 
         return {
-            title: values[0]?.trim() || "",
-            year: values[1]?.trim() || "",
-            medium: values[2]?.trim() || "",
-            length: parseInt(values[3]) || 0,
-            vibes: (values[4] || "")
+            title: values[1]?.trim() || "",
+            year: values[2]?.trim() || "",
+            medium: values[3]?.trim() || "",
+            length: parseInt(values[4]) || 0,
+            vibes: (values[5] || "")
                 .split("|")
                 .map(v => v.trim())
                 .filter(Boolean)
