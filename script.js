@@ -159,7 +159,8 @@ document.getElementById("randomMovie").addEventListener("click", () => {
             : movie.title;
 });
 
-document.getElementById("refreshData").addEventListener("click", async () => {
+document.getElementById("refreshData").addEventListener("click", async (e) => {
+    e.preventDefault();
 
     localStorage.removeItem(CACHE_KEY);
     localStorage.removeItem(TIME_KEY);
@@ -174,8 +175,7 @@ document.getElementById("refreshData").addEventListener("click", async () => {
     populateMediums();
     populateVibes();
 
-    document.getElementById("result").textContent =
-        "fresh data served hot.";
+    document.getElementById("result").textContent = "data refreshed!";
 });
 
 
