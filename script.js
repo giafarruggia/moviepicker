@@ -1,12 +1,31 @@
+const CACHE_KEY = "movies_cache";
+const TIME_KEY = "movies_cache_time";
+const ONE_HOUR = 1000 * 60 * 60;
+
+function setCache(data) {
+    localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+    localStorage.setItem(TIME_KEY, Date.now());
+}
+
+function getCache() {
+    const raw = localStorage.getItem(CACHE_KEY);
+    return raw ? JSON.parse(raw) : null;
+}
+
+function isStale() {
+    const last = Number(localStorage.getItem(TIME_KEY));
+    return !last || (Date.now() - last > ONE_HOUR);
+}
 
 let movies = [];
 
-fetch("movies.csv")
-.then(response => response.text())
-.then(text => {
+async function loadMoviesFromCSV() {
+    const response = await fetch("movies.csv");
+    const text = await response.text();
+
     const rows = text.trim().split(/\r?\n/);
 
-    movies = rows.slice(1).map(row => {
+    const data = rows.slice(1).map(row => {
         const values = row.split(",");
 
         return {
@@ -20,6 +39,30 @@ fetch("movies.csv")
                 .filter(Boolean)
         };
     });
+
+    setCache(data);
+    return data;
+}
+
+async function loadMovies() {
+    const cached = getCache();
+
+    // 🧊 1. instant load from cache if available
+    if (cached) {
+        movies = cached;
+        populateMediums();
+        populateVibes();
+    }
+
+    // 🔄 2. refresh in background if stale or missing
+    if (isStale() || !cached) {
+        const fresh = await loadMoviesFromCSV();
+
+        movies = fresh;
+        populateMediums();
+        populateVibes();
+    }
+}
 
     populateMediums();
     populateVibes();
@@ -99,3 +142,5 @@ document.getElementById("pickMovie").addEventListener("click", () => {
             ? `${movie.title} (${movie.year})`
             : movie.title;
 });
+
+loadMovies();
