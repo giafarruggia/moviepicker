@@ -139,4 +139,29 @@ document.getElementById("pickMovie").addEventListener("click", () => {
             : movie.title;
 });
 
+let lastRandomIndex = -1;
+
+document.getElementById("randomMovie").addEventListener("click", () => {
+    const result = document.getElementById("result");
+
+    if (!movies.length) {
+        result.textContent = "no movies loaded yet.";
+        return;
+    }
+
+    let index;
+
+    do {
+        index = Math.floor(Math.random() * movies.length);
+    } while (movies.length > 1 && index === lastRandomIndex);
+
+    lastRandomIndex = index;
+
+    const movie = movies[index];
+
+    result.textContent =
+        movie.year
+            ? `${movie.title} (${movie.year})`
+            : movie.title;
+});
 loadMovies();
