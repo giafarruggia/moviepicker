@@ -50,6 +50,10 @@ button {
     cursor: pointer;
 }
 
+.button-row button {
+    flex: 1;
+}
+
 #vibesContainer {
     display: flex;
     flex-wrap: wrap;
