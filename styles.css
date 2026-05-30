@@ -59,6 +59,19 @@ button {
     flex: 1;
 }
 
+.refresh-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #666;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.refresh-link:hover {
+    color: #000;
+}
+
 #vibesContainer {
     display: flex;
     flex-wrap: wrap;
