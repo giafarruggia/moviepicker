@@ -144,18 +144,12 @@ let lastRandomIndex = -1;
 document.getElementById("randomMovie").addEventListener("click", () => {
     const result = document.getElementById("result");
 
-    if (!movies.length) {
-        result.textContent = "no movies loaded yet.";
+    if (!movies || movies.length === 0) {
+        result.textContent = "movies still loading...";
         return;
     }
 
-    let index;
-
-    do {
-        index = Math.floor(Math.random() * movies.length);
-    } while (movies.length > 1 && index === lastRandomIndex);
-
-    lastRandomIndex = index;
+    let index = Math.floor(Math.random() * movies.length);
 
     const movie = movies[index];
 
