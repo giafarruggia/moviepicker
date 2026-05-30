@@ -64,10 +64,6 @@ async function loadMovies() {
     }
 }
 
-    populateMediums();
-    populateVibes();
-});
-
 function populateMediums() {
     const mediums = [...new Set(movies.map(m => m.medium))].sort();
     const select = document.getElementById("medium");
